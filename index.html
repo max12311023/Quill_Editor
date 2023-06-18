@@ -1,0 +1,171 @@
+    <!DOCTYPE html>
+<html>
+      <head>
+            <meta charset="utf-8">
+            <title>QuillEditor</title>
+
+            
+            <style>
+              body {
+                padding: 25px;
+              }
+              #bubble-container, #snow-container {
+                height: 300px;
+                margin-bottom: 10px;
+              }
+              .container {
+                display: flex;
+              }
+              .panel {
+                flex: 1;
+                margin-left: 25px;
+                margin-right: 25px;
+              }
+
+            </style>
+
+      </head>
+      <body>
+          <div class="container">
+            <div class="panel">
+              <div id="toolbar-container">
+                    <span class="ql-formats">
+                    <select class="ql-font"></select>
+                    <select class="ql-size"></select>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats">
+                    <select class="ql-color"></select>
+                    <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-script" value="sub"></button>
+                    <button class="ql-script" value="super"></button>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-header" value="1"></button>
+                    <button class="ql-header" value="2"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list" value="bullet"></button>
+                    <button class="ql-indent" value="-1"></button>
+                    <button class="ql-indent" value="+1"></button>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-direction" value="rtl"></button>
+                    <select class="ql-align"></select>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-link"></button>
+                    <button class="ql-image"></button>
+                    <button class="ql-video"></button>
+                    <button class="ql-formula"></button>
+                    <button id="custom-button">C</button>
+                    </span>
+                    <span class="ql-formats">
+                    <button class="ql-clean"></button>
+                    </span>
+                 </div>
+              <div id="snow-container"></div>
+              <div>
+                <button id="insert-table">Insert Table</button>
+              </div>
+            </div>
+       
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.min.js" type="text/javascript"></script>
+            <script src="https://unpkg.com/quill-table-ui@1.0.5/dist/umd/index.js" type="text/javascript"></script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.snow.min.css" rel="stylesheet">
+            <link href="https://unpkg.com/quill-table-ui@1.0.5/dist/index.css" rel="stylesheet">
+            <script src="image-drop.min.js"></script>
+            <script src="quill-resize-module.js"></script>
+            <script type="text/javascript">
+                var Embed = Quill.import('blots/block/embed');
+                class Hr extends Embed {
+                static create(value) {
+                    let node = super.create(value);
+                    // give it some margin
+                    node.setAttribute('style', "height:0px; margin-top:10px; margin-bottom:10px;");
+                    return node;
+                }
+                }
+                Hr.blotName = 'hr'; //now you can use .ql-hr classname in your toolbar
+                Hr.className = 'my-hr';
+                Hr.tagName = 'hr';
+
+                Quill.register("modules/resize", window.QuillResizeModule);
+                Quill.register({
+                    'modules/tableUI': quillTableUI.default
+                  }, true)
+                 Quill.register({
+                      'formats/hr': Hr
+                });  
+                  var snow = new Quill('#snow-container', {
+                    theme: 'snow',
+                    modules: {
+                        resize: {
+                              locale: {
+                                center: "center",
+                              },
+                            },
+                         imageDrop: true,
+                          toolbar: {
+                            container: '#toolbar-container' ,
+                            handlers : {
+                          'hr': customHrHandler
+                          }
+                        },
+     
+                      table: true,
+                      tableUI: true
+                    }
+                  });
+                  //cutomer button 
+                  var Parchment = Quill.import("parchment");
+
+                  let CustomClass = new Parchment.Attributor('custom', 'ql-custom', {
+                    scope: Parchment.Scope.INLINE
+                  });
+
+                  var customButton = document.querySelector('#custom-button');
+                  customButton.addEventListener('click', function() {
+                    var format = snow.getFormat();
+                    alert('123');
+                  });
+
+                  var customHrHandler = function(){
+                    // get the position of the cursor
+                    var range = snow.getSelection();
+                    if (range) {
+                        // insert the <hr> where the cursor is
+                        snow.insertEmbed(range.index,"hr","null")
+                    }
+                  }
+          
+                  const table = snow.getModule('table');
+
+                  function updateOutput() {
+                    const bubbleContent = bubble.getContents();
+                    const snowContent = snow.getContents();
+                    // TODO compare
+                    output.setContents(bubbleContent);
+                    const outputContent = output.getContents();
+                    // TODO compare outputContent
+                  }
+
+
+                  document.querySelector('#insert-table').addEventListener('click', function() {
+                    table.insertTable(3, 3);
+                  });
+            </script>
+          </div>
+
+      </body>
+</html>
