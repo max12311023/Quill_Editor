@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="BIG5">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="toolbar-container">
+			<span class="ql-formats">
+			<select class="ql-font"></select>
+			<select class="ql-size"></select>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-bold"></button>
+			<button class="ql-italic"></button>
+			<button class="ql-underline"></button>
+			<button class="ql-strike"></button>
+			</span>
+			<span class="ql-formats">
+			<select class="ql-color"></select>
+			<select class="ql-background"></select>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-script" value="sub"></button>
+			<button class="ql-script" value="super"></button>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-header" value="1"></button>
+			<button class="ql-header" value="2"></button>
+			<button class="ql-blockquote"></button>
+			<button class="ql-code-block"></button>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-list" value="ordered"></button>
+			<button class="ql-list" value="bullet"></button>
+			<button class="ql-indent" value="-1"></button>
+			<button class="ql-indent" value="+1"></button>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-direction" value="rtl"></button>
+			<select class="ql-align"></select>
+			<button id="custom-table"><svg viewBox="0 0 24 24"><path d="M9,14 L21,14 L21,11 L9,11 L9,14 Z M7,14 L7,11 L3,11 L3,14 L7,14 Z M9,6 L9,9 L21,9 L21,6 L9,6 Z M7,6 L3,6 L3,9 L7,9 L7,6 Z M9,19 L21,19 L21,16 L9,16 L9,19 Z M7,19 L7,16 L3,16 L3,19 L7,19 Z M3,4 L21,4 C22.1045695,4 23,4.8954305 23,6 L23,19 C23,20.1045695 22.1045695,21 21,21 L3,21 C1.8954305,21 1,20.1045695 1,19 L1,6 C1,4.8954305 1.8954305,4 3,4 Z" fill-rule="evenodd"/></svg></button>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-link"></button>
+			<button class="ql-image"></button>
+			<button id="custom-button"><svg viewBox="0 0 24 24"><path d="M15,3.41421356 L15,7 L18.5857864,7 L15,3.41421356 Z M19,9 L15,9 C13.8954305,9 13,8.1045695 13,7 L13,3 L5,3 L5,21 L19,21 L19,9 Z M5,1 L15.4142136,1 L21,6.58578644 L21,21 C21,22.1045695 20.1045695,23 19,23 L5,23 C3.8954305,23 3,22.1045695 3,21 L3,3 C3,1.8954305 3.8954305,1 5,1 Z" fill-rule="evenodd"/></button>
+			</span>
+			<span class="ql-formats">
+			<button class="ql-clean"></button>
+			</span>
+	</div>
+	<div id='editor'></div>
+	<!-- Quill -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.min.js" type="text/javascript"></script>
+	<script src="https://unpkg.com/quill-table-ui@1.0.5/dist/umd/index.js" type="text/javascript"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/2.0.0-dev.3/quill.snow.min.css" rel="stylesheet">
+	<link href="https://unpkg.com/quill-table-ui@1.0.5/dist/index.css" rel="stylesheet">
+	<script src="js/quill-resize-module.js"></script>
+
+	<script src="js/quilltext.js"></script>
+</body>
+</html>
